@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Toggle Showcase</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body data-theme="light">
+    <header>
+        <div class="logo">🌓 DarkMode Showcase</div>
+        <div class="header-toggles">
+            <!-- Sliding Toggle -->
+            <div class="toggle-container">
+                <span class="toggle-label">Toggle</span>
+                <div class="toggle-switch" id="slidingToggle" onclick="toggleSliding()">
+                    <div class="slider">
+                        <span class="icon">☀️</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Icon Toggle -->
+            <div class="toggle-container">
+                <span class="toggle-label">Icon</span>
+                <div class="icon-toggle" id="iconToggle" onclick="toggleIcon()">
+                    <span class="sun-icon">☀️</span>
+                    <span class="moon-icon">🌙</span>
+                </div>
+            </div>
+
+            <!-- Theme Selector -->
+            <div class="toggle-container">
+                <span class="toggle-label">Theme</span>
+                <div class="theme-selector">
+                    <div class="theme-btn" data-theme="light" onclick="setTheme('light')" title="Light"></div>
+                    <div class="theme-btn" data-theme="dark" onclick="setTheme('dark')" title="Dark"></div>
+                    <div class="theme-btn" data-theme="blue" onclick="setTheme('blue')" title="Blue"></div>
+                    <div class="theme-btn" data-theme="purple" onclick="setTheme('purple')" title="Purple"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Dark Mode Toggle Ideas</h1>
+            <p>A comprehensive showcase of pure HTML, CSS & JavaScript dark mode implementations. No frameworks, no libraries — just clean code.</p>
+            <div class="shortcut-badge">⌨️ Press 'D' to toggle dark mode</div>
+        </section>
+
+        <div class="cards-grid">
+            <!-- Card 1: CSS Variables + LocalStorage -->
+            <div class="card glow-effect">
+                <h3>1. CSS Variables + LocalStorage</h3>
+                <p>Theme preferences are saved in the browser and persist across page reloads.</p>
+                <div class="demo-area">
+                    <strong>Current Theme:</strong> <span id="currentTheme">light</span>
+                </div>
+                <div class="auto-mode-indicator" id="autoModeIndicator">
+                    <span class="status-dot" id="autoStatusDot"></span>
+                    <span id="autoModeText">Auto mode: Off</span>
+                </div>
+            </div>
+
+            <!-- Card 2: Sliding Animated Switch -->
+            <div class="card glow-effect">
+                <h3>2. Sliding Animated Switch</h3>
+                <p>Smooth sliding animation with cubic-bezier easing for a premium feel.</p>
+                <div class="demo-area">
+                    <div class="toggle-switch" onclick="toggleSliding()">
+                        <div class="slider">
+                            <span class="icon">☀️</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Multi Theme Switcher -->
+            <div class="card glow-effect">
+                <h3>3. Multi Theme Switcher</h3>
+                <p>Switch between Light, Dark, Blue, and Purple themes instantly.</p>
+                <div class="demo-area">
+                    <div class="theme-selector">
+                        <div class="theme-btn" data-theme="light" onclick="setTheme('light')"></div>
+                        <div class="theme-btn" data-theme="dark" onclick="setTheme('dark')"></div>
+                        <div class="theme-btn" data-theme="blue" onclick="setTheme('blue')"></div>
+                        <div class="theme-btn" data-theme="purple" onclick="setTheme('purple')"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Auto Time-Based Dark Mode -->
+            <div class="card glow-effect">
+                <h3>4. Auto Time-Based Dark Mode</h3>
+                <p>Automatically switches to dark mode after 6 PM and back to light after 6 AM.</p>
+                <div class="demo-area">
+                    <strong>Current Time:</strong> <span id="currentTime"></span>
+                </div>
+                <label style="display: flex; align-items: center; gap: 0.5rem; margin-top: 0.5rem; cursor: pointer;">
+                    <input type="checkbox" id="autoModeCheckbox" onchange="toggleAutoMode()">
+                    Enable Auto Mode
+                </label>
+            </div>
+
+            <!-- Card 5: Icon Morph (Sun ↔ Moon) -->
+            <div class="card glow-effect">
+                <h3>5. Icon Morph Animation</h3>
+                <p>Beautiful rotate and scale animation when switching between sun and moon icons.</p>
+                <div class="demo-area">
+                    <div class="icon-toggle" onclick="toggleIcon()">
+                        <span class="sun-icon">☀️</span>
+                        <span class="moon-icon">🌙</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Keyboard Shortcut -->
+            <div class="card glow-effect">
+                <h3>6. Keyboard Shortcut</h3>
+                <p>Press the 'D' key to quickly toggle dark mode without using the mouse.</p>
+                <div class="demo-area">
+                    <div class="shortcut-badge" style="font-size: 1rem; padding: 0.5rem 1rem;">Press 'D' Now!</div>
+                </div>
+            </div>
+
+            <!-- Card 7: Progress Bar Toggle -->
+            <div class="card glow-effect">
+                <h3>7. Progress Bar Toggle</h3>
+                <p>Visual progress indicator fills up when toggling the theme.</p>
+                <div class="demo-area">
+                    <div class="progress-toggle" onclick="toggleProgress()">
+                        <div class="progress-bar"></div>
+                        <span class="toggle-text" id="progressText">OFF</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 8: Section-wise Dark Mode -->
+            <div class="card glow-effect">
+                <h3>8. Section-wise Dark Mode</h3>
+                <p>Toggle dark mode for individual sections independently.</p>
+                <div class="demo-area">
+                    <button onclick="toggleSectionDark()" style="padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">Toggle Section</button>
+                    <div class="section-toggle-demo" id="sectionDemo">
+                        <p>This section can be toggled independently!</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 9: Ripple Click Animation -->
+            <div class="card glow-effect">
+                <h3>9. Ripple Click Animation</h3>
+                <p>Material Design-style ripple effect on toggle button clicks.</p>
+                <div class="demo-area">
+                    <button class="ripple-btn" onclick="createRipple(event)" style="padding: 0.75rem 1.5rem; background: var(--accent); color: white; border: none; border-radius: 8px; cursor: pointer; position: relative; overflow: hidden;">Click Me</button>
+                </div>
+            </div>
+
+            <!-- Card 10: System Theme Detection -->
+            <div class="card glow-effect">
+                <h3>10. System Theme Detection</h3>
+                <p>Respects your operating system's dark/light mode preference.</p>
+                <div class="demo-area">
+                    <strong>System Prefers:</strong> <span id="systemPref">Checking...</span>
+                </div>
+                <button onclick="syncWithSystem()" style="margin-top: 0.5rem; padding: 0.5rem 1rem; background: var(--accent); color: white; border: none; border-radius: 6px; cursor: pointer;">Sync with System</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>Built with pure HTML, CSS & JavaScript • No frameworks • No libraries</p>
+        <p style="margin-top: 0.5rem;">Press 'D' to toggle • Theme saved in LocalStorage</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

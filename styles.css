@@ -1,0 +1,481 @@
+/* CSS Variables for Theming */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f5f5f5;
+    --bg-card: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --accent: #6366f1;
+    --accent-hover: #4f46e5;
+    --border: #e5e5e5;
+    --shadow: rgba(0, 0, 0, 0.1);
+    --glow: rgba(99, 102, 241, 0.3);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f0f0f;
+    --bg-secondary: #1a1a1a;
+    --bg-card: #1e1e1e;
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+    --accent: #818cf8;
+    --accent-hover: #6366f1;
+    --border: #333333;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --glow: rgba(129, 140, 248, 0.5);
+}
+
+[data-theme="blue"] {
+    --bg-primary: #0a1628;
+    --bg-secondary: #112240;
+    --bg-card: #1a2f4d;
+    --text-primary: #e6f1ff;
+    --text-secondary: #8892b0;
+    --accent: #64ffda;
+    --accent-hover: #4adbc3;
+    --border: #233554;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --glow: rgba(100, 255, 218, 0.3);
+}
+
+[data-theme="purple"] {
+    --bg-primary: #1a0a2e;
+    --bg-secondary: #2d1b4e;
+    --bg-card: #3d236e;
+    --text-primary: #f0e6ff;
+    --text-secondary: #b8a8d8;
+    --accent: #c084fc;
+    --accent-hover: #a855f7;
+    --border: #4a307a;
+    --shadow: rgba(0, 0, 0, 0.3);
+    --glow: rgba(192, 132, 252, 0.4);
+}
+
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Page Fade Transition */
+body.fade-out {
+    opacity: 0;
+}
+
+body.fade-in {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Header */
+header {
+    background-color: var(--bg-secondary);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--accent);
+}
+
+.header-toggles {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Toggle Styles */
+.toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.toggle-label {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+/* 1. Sliding Toggle Switch */
+.toggle-switch {
+    position: relative;
+    width: 60px;
+    height: 32px;
+    background-color: var(--border);
+    border-radius: 16px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.toggle-switch .slider {
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 24px;
+    height: 24px;
+    background-color: var(--bg-card);
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.toggle-switch.active {
+    background-color: var(--accent);
+}
+
+.toggle-switch.active .slider {
+    transform: translateX(28px);
+}
+
+.toggle-switch .slider .icon {
+    font-size: 14px;
+    transition: opacity 0.3s;
+}
+
+/* 2. Icon Toggle with Morph Animation */
+.icon-toggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--bg-card);
+    border: 2px solid var(--border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.25rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.icon-toggle:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 15px var(--glow);
+}
+
+.icon-toggle .sun-icon,
+.icon-toggle .moon-icon {
+    position: absolute;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.icon-toggle .moon-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+}
+
+.icon-toggle.dark .sun-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+.icon-toggle.dark .moon-icon {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+}
+
+/* 3. Multi Theme Selector */
+.theme-selector {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.theme-btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.theme-btn:hover {
+    transform: scale(1.1);
+}
+
+.theme-btn.active {
+    border-color: var(--accent);
+    box-shadow: 0 0 10px var(--glow);
+}
+
+.theme-btn.active::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    text-shadow: 0 0 3px rgba(0,0,0,0.5);
+}
+
+.theme-btn[data-theme="light"] {
+    background: linear-gradient(135deg, #ffffff, #e0e0e0);
+}
+
+.theme-btn[data-theme="dark"] {
+    background: linear-gradient(135deg, #1a1a1a, #0f0f0f);
+}
+
+.theme-btn[data-theme="blue"] {
+    background: linear-gradient(135deg, #0a1628, #1a2f4d);
+}
+
+.theme-btn[data-theme="purple"] {
+    background: linear-gradient(135deg, #1a0a2e, #3d236e);
+}
+
+/* Main Content */
+main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.hero {
+    text-align: center;
+    padding: 3rem 0;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Cards Grid */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px var(--shadow);
+}
+
+.card:hover {
+    box-shadow: 0 8px 25px var(--shadow);
+    transform: translateY(-2px);
+}
+
+.card h3 {
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+}
+
+.card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.card .demo-area {
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    text-align: center;
+}
+
+/* Keyboard Shortcut Badge */
+.shortcut-badge {
+    display: inline-block;
+    background-color: var(--bg-secondary);
+    border: 1px solid var(--border);
+    padding: 0.25rem 0.75rem;
+    border-radius: 6px;
+    font-family: monospace;
+    font-size: 0.875rem;
+    color: var(--accent);
+    margin-top: 0.5rem;
+}
+
+/* Auto Mode Indicator */
+.auto-mode-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.auto-mode-indicator.active {
+    color: var(--accent);
+    border: 1px solid var(--accent);
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--border);
+}
+
+.status-dot.active {
+    background-color: var(--accent);
+    box-shadow: 0 0 8px var(--glow);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Ripple Effect */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* Progress Bar Toggle */
+.progress-toggle {
+    position: relative;
+    width: 100px;
+    height: 40px;
+    background-color: var(--border);
+    border-radius: 20px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.progress-toggle .progress-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--accent), var(--accent-hover));
+    transition: width 0.5s ease;
+    border-radius: 20px;
+}
+
+.progress-toggle .toggle-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    z-index: 1;
+    white-space: nowrap;
+}
+
+.progress-toggle.active .progress-bar {
+    width: 100%;
+}
+
+/* Section-wise Toggle Demo */
+.section-toggle-demo {
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.section-toggle-demo.dark-section {
+    background-color: #1a1a1a;
+    color: #ffffff;
+    border-color: #333;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-secondary);
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .header-toggles {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Neon Glow Effect for Dark Mode */
+[data-theme="dark"] .card.glow-effect,
+[data-theme="blue"] .card.glow-effect,
+[data-theme="purple"] .card.glow-effect {
+    box-shadow: 0 0 20px var(--glow), 0 4px 6px var(--shadow);
+}
+
+[data-theme="dark"] .card.glow-effect:hover,
+[data-theme="blue"] .card.glow-effect:hover,
+[data-theme="purple"] .card.glow-effect:hover {
+    box-shadow: 0 0 30px var(--glow), 0 8px 25px var(--shadow);
+}</content>
+<parameter name="filePath">d:\html1\64 darkmode\styles.css
